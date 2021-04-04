@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>Register</h1>
     <input type="email" name="email" placeholder="email" v-model="email">
     <input type="password" name="password" placeholder="password" v-model="password">
@@ -8,27 +8,23 @@
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService'
+  import AuthenticationService from '../services/AuthenticationService'
 
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      email: '',
-      password: ''
-    }
-  },
-  methods: {
-    async register () {
-      await AuthenticationService.register({
-        email: this.email,
-        password: this.password
-      })
+  export default {
+    data () {
+      return {
+        email: '',
+        password: ''
+      }
+    },
+    methods: {
+      async register() {
+        const respone = await AuthenticationService.register({
+          email: this.email,
+          password: this.password
+        })
+        console.log(respone.data);
+      }
     }
   }
-}
 </script>
-
-<style scoped>
-
-</style>
