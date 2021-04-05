@@ -8,4 +8,5 @@ module.exports = (app) => {
   })
 
   app.post('/user', DatabaseController.getAllDataByName)
+  app.get('/user', DatabaseController.getAllName)
 }
