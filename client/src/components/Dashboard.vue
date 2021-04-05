@@ -31,7 +31,7 @@
       </div>
       <v-row>
         <v-col cols="12" lg="9" md="12">
-          <line-chart :height="250" :chart-data="datacollection" :key="chartKey"  style="height: 100%;"></line-chart>
+          <line-chart :height="250" :chart-data="datacollection" :key="chartKey" style="height: 100%;"></line-chart>
         </v-col>
         <v-col cols="12" lg="3" md="12">
           <div id="data_table">
@@ -81,7 +81,8 @@ export default {
           labels: [],
           datasets: [{
             label: 'Avg Temp',
-            backgroundColor: '#6495ED',
+            borderColor:'#6495ED',
+            fill: false,
             data: []
           }]
         },
