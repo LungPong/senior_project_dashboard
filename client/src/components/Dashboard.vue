@@ -81,15 +81,18 @@ export default {
         datacollection: {
           labels: [],
           datasets: [{
-            label: 'Avg Temp',
+            label: 'Average Temperature',
             borderColor:'#6495ED',
+            fill: false,
+            lineTension: 0.1,
+            data: []
+          },
+          {
+            label: 'Moving Average',
+            borderColor:'#ff3333',
             fill: false,
             data: []
           }]
-        },
-        chartOptions: {
-          responsive: true,
-          maintainAspectRation: false
         },
         allTemp: []
     }
@@ -113,6 +116,15 @@ export default {
       this.searchName = ''
       this.getTemp()
     },
+    getMovingAvg: function (tempArray) {
+      let movingAvgArray = [null, null]
+      for (var i = 2; i < tempArray.length; i++){
+        let movingAvgValue = 0
+        movingAvgValue = ((parseFloat(tempArray[i-2]) + parseFloat(tempArray[i-1]) + parseFloat(tempArray[i]))/3).toFixed(1)
+        movingAvgArray.push(movingAvgValue)
+      }
+      return movingAvgArray
+    },
     async getAllName() {
       const respone = await DatabaseServices.getAllName()
       this.nameList = respone.data.data
@@ -123,6 +135,11 @@ export default {
       this.datacollection.datasets[0].data = respone.data.graphValues
       this.allTemp = respone.data.allTemp
       this.movingAvg = respone.data.movingAvg
+
+      if (this.movingAvg) {
+        const graphMovingAvgValue = this.getMovingAvg(this.datacollection.datasets[0].data)
+        this.datacollection.datasets[1].data = graphMovingAvgValue
+      }
 
       // Refresh graph
       this.forceRerender()
