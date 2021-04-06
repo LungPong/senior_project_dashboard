@@ -77,6 +77,7 @@ export default {
         name: '',
         searchName: '',
         nameList: [],
+        movingAvg: false,
         datacollection: {
           labels: [],
           datasets: [{
@@ -121,6 +122,7 @@ export default {
       this.datacollection.labels = respone.data.graphLabels
       this.datacollection.datasets[0].data = respone.data.graphValues
       this.allTemp = respone.data.allTemp
+      this.movingAvg = respone.data.movingAvg
 
       // Refresh graph
       this.forceRerender()

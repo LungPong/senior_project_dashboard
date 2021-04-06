@@ -1,5 +1,6 @@
 const { db } = require('../configs/config')
 const { avgTemp } = require('./Utils')
+const { diffDate } = require('./Utils')
 
 module.exports = {
   async getAllDataByName (req, res) {
@@ -47,10 +48,14 @@ module.exports = {
         graphValues.push(avgTemp(tempArray))
       })
 
+      // Get difference date
+      const movingAvg = diffDate(graphLabels)
+
       res.status(200).send({
         graphLabels: graphLabels,
         graphValues: graphValues,
-        allTemp: allTemp
+        allTemp: allTemp,
+        movingAvg: movingAvg
       })
     }catch (err) {
       res.status(500).send({
