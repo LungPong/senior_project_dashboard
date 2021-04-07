@@ -112,6 +112,7 @@ export default {
       this.allTemp = []
       this.datacollection.labels = []
       this.datacollection.datasets[0].data = []
+      this.datacollection.datasets[1].data = []
       this.name = this.searchName
       this.searchName = ''
       this.getTemp()
