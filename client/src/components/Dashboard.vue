@@ -28,15 +28,16 @@
     <v-main>
       <div id="name_label" style="margin: 30px">
         <v-toolbar-title style="font-size: 40px; font-family:verdana">{{name}}</v-toolbar-title>
+        <v-toolbar-title style="font-size: 20px; font-family:verdana">{{movingAvgStatus}}</v-toolbar-title>
       </div>
       <v-row>
         <v-col cols="12" lg="9" md="12">
           <line-chart :height="250" :chart-data="datacollection" :key="chartKey" style="height: 100%;"></line-chart>
         </v-col>
         <v-col cols="12" lg="3" md="12">
-          <div id="data_table">
-            <v-simple-table>
-              <template v-slot:default>
+          <div id="data_table" style="max-height: 50px">
+            <v-simple-table height="720px" >
+              <template v-slot:default >
                 <thead>
                   <tr>
                     <th class="text-left" style="background-color: #6495ED; color: white">
@@ -78,6 +79,7 @@ export default {
         searchName: '',
         nameList: [],
         movingAvg: false,
+        movingAvgStatus: 'Moving Average : Not available',
         datacollection: {
           labels: [],
           datasets: [{
@@ -115,6 +117,7 @@ export default {
       this.datacollection.datasets[1].data = []
       this.name = this.searchName
       this.searchName = ''
+      this.movingAvgStatus = 'Moving Average : Not available'
       this.getTemp()
     },
     getMovingAvg: function (tempArray) {
@@ -140,6 +143,7 @@ export default {
       if (this.movingAvg) {
         const graphMovingAvgValue = this.getMovingAvg(this.datacollection.datasets[0].data)
         this.datacollection.datasets[1].data = graphMovingAvgValue
+        this.movingAvgStatus = "Moving Average : Available"
       }
 
       // Refresh graph
