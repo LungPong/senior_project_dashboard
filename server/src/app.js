@@ -9,10 +9,7 @@ const app = express()
 app.use(express.json())
 app.use(morgan('combined'))
 app.use(cors())
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(serveStatic("public"));
-}
+app.use(serveStatic("../../client/dist"));
 
 require('./routes')(app)
 
