@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"start": "npm run build-frontend && npm run server",
+		"start": "npm run server",
 		"build-frontend": "cd client && npm i --save && npm run build",
 		"client": "cd client && npm i --save && npm run serve",
 		"server": "cd server && npm i --save && npm start"
