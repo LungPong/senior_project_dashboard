@@ -13,4 +13,4 @@ app.use(serveStatic(path.join(__dirname, '../../client/dist')));
 
 require('./routes')(app)
 
-app.listen(config.port, console.log('http://localhost:9070/'))
+app.listen(config.port)
