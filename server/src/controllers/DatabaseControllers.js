@@ -11,6 +11,19 @@ module.exports = {
       let allTemp = []
       let uniqueIDForTable = 0
 
+      // remove value if more than 30 days
+      await db.ref("User/"+req.body.name).once('value').then(function(data){
+        data.forEach(dataSnapshot => {
+          let nowTimestamp = new Date(Date.now())
+          let dataTimestamp = new Date(dataSnapshot.val().date)
+          const diffTime = Math.abs(nowTimestamp - dataTimestamp)
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+          if(diffDays >= 30){
+            dataSnapshot.getRef().remove()
+          }
+        })
+      })
+
       // Get all data from db
       await db.ref("User/"+req.body.name).once('value').then(function(data){
 

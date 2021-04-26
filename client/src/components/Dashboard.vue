@@ -79,7 +79,7 @@ export default {
         searchName: '',
         nameList: [],
         movingAvg: false,
-        movingAvgStatus: 'Moving Average : Not available',
+        movingAvgStatus: 'Moving Average : Incalculable',
         datacollection: {
           labels: [],
           datasets: [{
@@ -117,7 +117,7 @@ export default {
       this.datacollection.datasets[1].data = []
       this.name = this.searchName
       this.searchName = ''
-      this.movingAvgStatus = 'Moving Average : Not available'
+      this.movingAvgStatus = 'Moving Average : Incalculable'
       this.getTemp()
     },
     getMovingAvg: function (tempArray) {
@@ -143,7 +143,7 @@ export default {
       if (this.movingAvg) {
         const graphMovingAvgValue = this.getMovingAvg(this.datacollection.datasets[0].data)
         this.datacollection.datasets[1].data = graphMovingAvgValue
-        this.movingAvgStatus = "Moving Average : Available"
+        this.movingAvgStatus = "Moving Average : Calculable"
       }
 
       // Refresh graph
